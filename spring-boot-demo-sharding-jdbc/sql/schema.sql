@@ -32,6 +32,8 @@ CREATE TABLE `t_order_2`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT ='Spring Boot Demo 分库分表 系列示例表2';
 
+create database `spring-boot-demo-2`;
+
 USE `spring-boot-demo-2`;
 
 DROP TABLE IF EXISTS `t_order_0`;

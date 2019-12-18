@@ -82,6 +82,14 @@
     <user.agent.version>1.20</user.agent.version>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>2.1.2</version>
+    </dependency>
+  </dependencies>
+
   <dependencyManagement>
     <dependencies>
       <dependency>

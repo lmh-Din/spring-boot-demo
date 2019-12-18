@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * <p>
@@ -40,6 +41,10 @@ public class SpringBootDemoShardingJdbcApplicationTests {
      */
     @Test
     public void testInsert() {
+        IntStream.range(0, 10).forEach(a -> {
+            System.out.println(a);
+//            IntStream.range()
+        });
         for (long i = 1; i < 10; i++) {
             for (long j = 1; j < 20; j++) {
                 Order order = Order.builder().userId(i).orderId(j).remark(RandomUtil.randomString(20)).build();
@@ -56,6 +61,7 @@ public class SpringBootDemoShardingJdbcApplicationTests {
         Order update = new Order();
         update.setRemark("修改备注信息");
         orderMapper.update(update, Wrappers.<Order>update().lambda().eq(Order::getOrderId, 2).eq(Order::getUserId, 2));
+
     }
 
     /**

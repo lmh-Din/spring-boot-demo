@@ -143,6 +143,14 @@ public class UserServiceTest extends SpringBootDemoOrmMybatisPlusApplicationTest
         log.debug("【page.getRecords()】= {}", page.getRecords());
     }
 
+    @Test
+    public void testQueryByParam(){
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.ge("status", "0");
+        List<User> list = userService.list(wrapper);
+        System.out.println(list.toString());
+    }
+
     /**
      * 初始化数据
      */

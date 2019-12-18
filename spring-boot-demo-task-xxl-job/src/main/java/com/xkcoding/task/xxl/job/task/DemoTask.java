@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
  * @date Created in 2019-08-07 10:15
  */
 @Slf4j
-@Component
-@JobHandler("demoTask")
+//@Component
+//@JobHandler("demoTask")
 public class DemoTask extends IJobHandler {
 
     /**

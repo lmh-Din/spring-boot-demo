@@ -66,13 +66,14 @@ public class DataSourceShardingConfig {
         return ShardingDataSourceFactory.createDataSource(dataSourceMap(), shardingRuleConfig, new ConcurrentHashMap<>(16), properties);
     }
 
+    //分表逻辑
     private TableRuleConfiguration orderTableRule() {
         TableRuleConfiguration tableRule = new TableRuleConfiguration();
         // 设置逻辑表名
         tableRule.setLogicTable("t_order");
         // ds${0..1}.t_order_${0..2} 也可以写成 ds$->{0..1}.t_order_$->{0..1}
         tableRule.setActualDataNodes("ds${0..1}.t_order_${0..2}");
-        tableRule.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("order_id", "t_order_$->{order_id % 3}"));
+        tableRule.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("order_id", "t_order_$->{order_id % 2}"));
         tableRule.setKeyGenerator(customKeyGenerator());
         tableRule.setKeyGeneratorColumnName("order_id");
         return tableRule;
@@ -83,14 +84,14 @@ public class DataSourceShardingConfig {
 
         // 配置第一个数据源
         HikariDataSource ds0 = new HikariDataSource();
-        ds0.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        ds0.setDriverClassName("org.mariadb.jdbc.Driver");
         ds0.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/spring-boot-demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8");
         ds0.setUsername("root");
         ds0.setPassword("root");
 
         // 配置第二个数据源
         HikariDataSource ds1 = new HikariDataSource();
-        ds1.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        ds1.setDriverClassName("org.mariadb.jdbc.Driver");
         ds1.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/spring-boot-demo-2?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8");
         ds1.setUsername("root");
         ds1.setPassword("root");
