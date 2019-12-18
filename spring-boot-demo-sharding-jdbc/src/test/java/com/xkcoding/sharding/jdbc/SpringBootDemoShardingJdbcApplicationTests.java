@@ -49,6 +49,10 @@ public class SpringBootDemoShardingJdbcApplicationTests {
             for (long j = 1; j < 20; j++) {
                 Order order = Order.builder().userId(i).orderId(j).remark(RandomUtil.randomString(20)).build();
                 orderMapper.insert(order);
+
+
+
+
             }
         }
     }
